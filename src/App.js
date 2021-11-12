@@ -2,12 +2,13 @@
 /*global chrome*/
 
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import logo from "./logo.svg";
 
 function App() {
   const [url, setUrl] = useState("");
   const [responseFromContent, setResponseFromContent] = useState("");
+  const [jobInfo, setJobInfo] = useState();
 
   //gets current tab url
   useEffect(() => {
@@ -44,7 +45,7 @@ function App() {
 
   const copyJobInformation = () => {
     const message = {
-      from: React,
+      from: "React",
       message: "copy job",
     };
 
@@ -57,7 +58,9 @@ function App() {
       chrome.tabs.query(queryInfo, (tabs) => {
         const currentTabId = tabs[0].id;
         chrome.tabs.sendMessage(currentTabId, message, (response) => {
-          setResponseFromContent(response);
+          // setResponseFromContent(response);
+          setJobInfo(response);
+          console.log(response);
         });
       });
   };

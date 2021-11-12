@@ -19,38 +19,18 @@ const messagesFromReactAppListener = (request, sender, response) => {
     request.from === "React" &&
     request.message === "copy job"
   ) {
-    // create snapshot of the DOM
-    // const snapshot = document.createElement("html");
-    // snapshot.innerHTML = document.documentElement.innerHTML;
-    // const jobDetails = snapshot.querySelector("#job-details");
 
-    const jobDetails = document.querySelector("#job-details");
-    console.log("jobDetails", jobDetails.innerHTML);
-    // Get all information from jobDetails
-    const jobTitle = jobDetails.querySelector("h1").innerText;
-    const companyName = jobDetails.querySelector("h2").innerText;
-    const jobDescription =
-      jobDetails.querySelector("#job-description").innerText;
-    const jobLocation = jobDetails.querySelector("#job-location").innerText;
-    const jobDate = jobDetails.querySelector("#job-date").innerText;
-    const jobUrl = jobDetails.querySelector("#job-url").innerText;
 
-    // create a new job object
-    const job = {
-      title: jobTitle,
-      company: companyName,
-      description: jobDescription,
-      location: jobLocation,
-      date: jobDate,
-      url: jobUrl,
-    };
+    const jobTitle = document.querySelector("h2").innerText;
 
-    // send job object to App.js
-    chrome.runtime.sendMessage({
-      from: "content",
-      message: "job",
-      job,
-    });
+
+    const jobDetails = document.getElementById("job-details");
+    let jobDetailsText = {
+      jobTitle,
+      jobDetails: jobDetails.innerText
+    }
+    
+    response(jobDetailsText);
   }
 };
 
