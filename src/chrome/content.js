@@ -21,25 +21,40 @@ const messagesFromReactAppListener = (request, sender, response) => {
   ) {
     const jobTitleText = document.querySelector("h2.t-24.t-bold").innerText;
 
-    const companyNameAndLocation = document.querySelector(
-      "span.jobs-unified-top-card__subtitle-primary-grouping.mr2.t-black"
-    );
+    const jobInsights = document.querySelector(".mt2");
 
     const jobDetails = document.getElementById("job-details").innerText;
 
-    console.log("jobTitleText", jobTitleText);
-    console.log("companyNameAndLocation", companyNameAndLocation);
-    console.log("jobDetails", jobDetails);
-    let jobDetailsText = {
+    let jobInsight = [];
+
+    const getTextFromChildNodes = (parentNode) => {
+      for (let i = 0; i < parentNode.childNodes.length; i++) {
+        let child = parentNode.childNodes[i];
+        if (child.nodeType !== 3 && child.childNodes) {
+          getTextFromChildNodes(child);
+        } else {
+          let text = child.nodeValue;
+          if (text.trim().length > 0) {
+            jobInsight.push(text.trim());
+          }
+        }
+      }
+    };
+
+    getTextFromChildNodes(jobInsights);
+
+    let jobDetailsObj = {
+      company: jobInsight[0],
+      location: jobInsight[1],
+      where: jobInsight[2] || "",
+      posted: jobInsight[3],
+      applicants: jobInsight[4] || "",
       jobTitleText,
       jobDetails,
     };
-
-    response(jobDetailsText);
+    console.log("jobDetailsObj", jobDetailsObj);
+    response(jobDetailsObj);
   }
 };
 
-/**
- * Fired when a message is sent from either an extension process or a content script.
- */
 chrome.runtime.onMessage.addListener(messagesFromReactAppListener);
