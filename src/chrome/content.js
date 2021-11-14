@@ -19,17 +19,22 @@ const messagesFromReactAppListener = (request, sender, response) => {
     request.from === "React" &&
     request.message === "copy job"
   ) {
+    const jobTitleText = document.querySelector("h2.t-24.t-bold").innerText;
 
+    const companyNameAndLocation = document.querySelector(
+      "span.jobs-unified-top-card__subtitle-primary-grouping.mr2.t-black"
+    );
 
-    const jobTitle = document.querySelector("h2").innerText;
+    const jobDetails = document.getElementById("job-details").innerText;
 
-
-    const jobDetails = document.getElementById("job-details");
+    console.log("jobTitleText", jobTitleText);
+    console.log("companyNameAndLocation", companyNameAndLocation);
+    console.log("jobDetails", jobDetails);
     let jobDetailsText = {
-      jobTitle,
-      jobDetails: jobDetails.innerText
-    }
-    
+      jobTitleText,
+      jobDetails,
+    };
+
     response(jobDetailsText);
   }
 };
