@@ -6,12 +6,12 @@
   "action": {
     "default_popup": "index.html"
   },
-  "permissions": [
-    "activeTab"
-  ],
-  "optional_permissions": [
-    "tabs"
-  ],
+  "permissions": ["activeTab", "identity"],
+  "optional_permissions": ["tabs"],
+  "background": {
+    "service_worker": "./background.js",
+    "type": "module"
+  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
@@ -24,5 +24,10 @@
     "16": "logo192.png",
     "48": "logo192.png",
     "128": "logo192.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgj/rblvvDuP1UZMZkjaplqY3rYIAmPAJiKZ580hGePvXfmJKzms2wyaI79pgY/tkwG0eJ0HNTUatogP2NyaweWU9pp2xVryEms1JgQycDuTptcWcPBoyRFTJeLJjnLV58hMWh042eobbZdPvfyPEr8QVdGxQARGMBugF7ix34+DLFoJyparAggmENiVjsHWHzdGX8iCJKckGQhvSuEhElq4kkFpDwuCJ1UqyQ2VEgld06vNtHrx0o9h7y5AbAHFJR45VFc7KoUklOrGPm8Ckgnli5l0KL6tpIm7/BdPPULOmHsEfORH1mkKJDDfmFCOXANrebrBJHOH0QRg+S4aR3QIDAQAB",
+  "oauth2": {
+    "client_id": "673160530282-s5hjt3letpocfcjbbnq1tbsqi8g21qcs.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/spreadsheets"]
   }
 }
