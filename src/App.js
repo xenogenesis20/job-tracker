@@ -21,6 +21,19 @@ function App() {
       });
   }, []);
 
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+
+  //   script.src = "https://apis.google.com/js/client.js?onload=onGAPILoad";
+  //   script.async = true;
+
+  //   document.body.appendChild(script);
+
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
+
   //sends message to content script
   const sendTestMessage = () => {
     const message = {
@@ -80,7 +93,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>URL: </p>
         <p>{url}</p>
-        <button onClick={sendTestMessage}>SEND Str</button>
+        <button onClick={sendTestMessage}>TEST</button>
         <button onClick={copyJobInformation}>Copy Job Details</button>
         <p>Response from content:</p>
         <p>{responseFromContent}</p>
